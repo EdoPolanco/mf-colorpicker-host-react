@@ -11,7 +11,7 @@ import { useColorlist } from "colorList/useColorlist";
 import "./index.css";
 
 const App = () => {
-const {color, colorList, handleChangeColor, handleSubmitButtonColor} = useColors();
+const {color, colorList, handleChangeColor, handleSubmitSaveColor, handleDeleteColor} = useColors();
 const {presetList, handleTitleChange, handleConjuntoChange, handleDrop, handleRemoveConjunto} = usePreset();
 const {draggedColor, handleDragStart} = useColorlist();
 
@@ -33,7 +33,7 @@ useEffect(() => {
             <ColorList 
               colorList = {colorList} 
               handleDragStart = {handleDragStart}
-              handleSubmitButtonColor = {handleSubmitButtonColor}
+              handleDeleteColor = {handleDeleteColor}
             />
           </div>
         </div>
@@ -41,7 +41,7 @@ useEffect(() => {
           <ColorPicker 
             color = {color} 
             handleChangeColor = {handleChangeColor} 
-            handleSubmitButtonColor = {handleSubmitButtonColor}
+            handleSubmitSaveColor = {handleSubmitSaveColor}
             />
         </div>
       </div>
