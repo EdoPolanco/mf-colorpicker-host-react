@@ -67,9 +67,24 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-        colorPicker: "mf_colorpicker@https://grand-peony-c00760.netlify.app/remoteEntry.js",
-        colorList: "mf_colorlist@https://iridescent-tulumba-b424f6.netlify.app/remoteEntry.js",
-        preSet: "mf_preset@https://meek-liger-777a0a.netlify.app/remoteEntry.js",
+        colorPicker: argv.mode === "development" 
+                       ? "mf_colorpicker@http://localhost:3001/remoteEntry.js" 
+                       : "mf_colorpicker@https://grand-peony-c00760.netlify.app/remoteEntry.js",
+        colorList:  argv.mode === "development" 
+                      ? "mf_colorlist@http://localhost:3002/remoteEntry.js" 
+                      : "mf_colorlist@https://iridescent-tulumba-b424f6.netlify.app/remoteEntry.js",
+        preSet:  argv.mode === "development" 
+                   ? "mf_preset@http://localhost:3003/remoteEntry.js" 
+                   : "mf_preset@https://meek-liger-777a0a.netlify.app/remoteEntry.js",
+        mf_navbar:  argv.mode === "development" 
+                   ? "mf_navbar@http://localhost:3004/remoteEntry.js" 
+                   : "mf_navbar@https://glittering-crisp-6f1b26/remoteEntry.js",
+        mf_information:  argv.mode === "development" 
+                   ? "mf_information@http://localhost:3005/remoteEntry.js" 
+                   : "mf_information@https:/rad-liger-5a56f1.netlify.app/remoteEntry.js",
+        mf_vue:  argv.mode === "development" 
+                   ? "mf_vue@http://localhost:3006/remoteEntry.js" 
+                   : "mf_vue@https://dancing-crostata-926ae8.netlify.app/remoteEntry.js",
       },
       exposes: {},
       shared: {

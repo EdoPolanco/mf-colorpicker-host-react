@@ -1,14 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
-
-import ColorPicker from "colorPicker/ColorPicker";
-import ColorList from "colorList/ColorList";
-import Preset  from "preSet/Preset"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Navbar  from "mf_navbar/Navbar"
 import { useColors } from "colorPicker/useColors";
 import { usePreset } from "preSet/usePreset";
 import { useColorlist } from "colorList/useColorlist";
 
+import Loader from "./components/Loader"
+
 import "./index.css";
+
+const Features = lazy(()=> import( "./pages/Features"));
+const Vue = lazy(()=> import( "./pages/Vue"));
+const Home = lazy(()=> import( "./pages/Home"));
+const NotFound = lazy(()=> import( "./pages/NotFound"));
 
 const App = () => {
 const {color, colorList, handleChangeColor, handleSubmitSaveColor, handleDeleteColor} = useColors();
@@ -24,39 +29,44 @@ useEffect(() => {
 }, []);
 
   return (
-  <>
-    <h1 className="text-center bg-dark text-white p-4"> Color Picker</h1>
-    <div className="container mt-4">
-      <div className="row">
-        <div className="col-12 col-md-4">
-          <div className="card" style={{maxHeight: '250px', overflowY: 'auto'}}>
-            <ColorList 
-              colorList = {colorList} 
-              handleDragStart = {handleDragStart}
-              handleDeleteColor = {handleDeleteColor}
-            />
-          </div>
-        </div>
-        <div className="col-12 col-md-8">
-          <ColorPicker 
+  <BrowserRouter>
+  <Navbar />
+    <h1 className="text-center bg-secondary-subtle text-dark p-4"> Color Picker</h1>
+    <Routes>
+      <Route path="/" element={
+        <Suspense fallback={<Loader />}>
+          <Home 
+            colorList = {colorList} 
+            handleDragStart = {handleDragStart}
+            handleDeleteColor = {handleDeleteColor}
             color = {color} 
             handleChangeColor = {handleChangeColor} 
-            handleSubmitSaveColor = {handleSubmitSaveColor}
-            />
-        </div>
-      </div>
-      <div className="row mt-5">
-        <Preset
-          presetList = {presetList}
-          handleTitleChange = {handleTitleChange}
-          handleConjuntoChange = {handleConjuntoChange}
-          draggedColor={draggedColor}
-          handleDrop={handleDrop}
-          handleRemoveConjunto={handleRemoveConjunto}
-        />
-      </div>
-    </div>
-  </>
+            handleSubmitSaveColor = {handleSubmitSaveColor} 
+            presetList = {presetList}
+            handleTitleChange = {handleTitleChange}
+            handleConjuntoChange = {handleConjuntoChange}
+            draggedColor={draggedColor}
+            handleDrop={handleDrop}
+            handleRemoveConjunto={handleRemoveConjunto}
+          />
+        </Suspense>
+        } >
+          
+        </Route>
+      <Route path="/features" element={
+        <Suspense fallback={<Loader />}>
+          <Features colorList = {colorList} />
+        </Suspense>
+        
+        } ></Route>
+      <Route path="/Vue" element={
+        <Suspense fallback={<Loader />}>
+          <Vue />
+        </Suspense>
+        } ></Route>
+      <Route path="*" element={<NotFound />} ></Route>
+    </Routes>
+  </BrowserRouter>
   )
 };
 const rootElement = document.getElementById("app")
