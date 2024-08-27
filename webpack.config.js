@@ -81,7 +81,7 @@ module.exports = (_, argv) => ({
                    : "mf_navbar@https://glittering-crisp-6f1b26.netlify.app/remoteEntry.js",
         mf_information:  argv.mode === "development" 
                    ? "mf_information@http://localhost:3005/remoteEntry.js" 
-                   : "mf_information@https:/rad-liger-5a56f1.netlify.app/remoteEntry.js",
+                   : "mf_information@https://rad-liger-5a56f1.netlify.app/remoteEntry.js",
         mf_vue:  argv.mode === "development" 
                    ? "mf_vue@http://localhost:3006/remoteEntry.js" 
                    : "mf_vue@https://dancing-crostata-926ae8.netlify.app/remoteEntry.js",
