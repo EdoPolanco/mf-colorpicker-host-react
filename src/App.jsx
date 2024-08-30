@@ -64,6 +64,11 @@ useEffect(() => {
           <Vue />
         </Suspense>
         } ></Route>
+      {/* <Route path="/Vue/:name" element={ // el :name se usa para enviar parametros como un id o nombre para en este caso sacar un detalle
+        <Suspense fallback={<Loader />}>
+          <DetailVue />                      // esto es solo a modo de ejemplo.
+        </Suspense>
+        } ></Route> */}
       <Route path="*" element={<NotFound />} ></Route>
     </Routes>
   </BrowserRouter>
